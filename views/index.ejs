@@ -1,0 +1,20 @@
+<% include header %>
+
+    <% if(entries.length) { %>
+        <% entries.forEach(function(entry)  { %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="muted pull-right"><%= entry.published %></div>
+                <%= entry.title %>
+            </div>
+            <div class="panel-body">
+                <%= entry.content %>
+            </div>
+        </div>
+        <% }) %>
+    <% }else { %>
+        <span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 18px; font-weight: 600;">No entries! </span><a href="/newEntry" class="btn btn-primary">Add Entry</a>
+    <% } %>
+
+
+<% include footer %>
