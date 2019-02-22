@@ -24,12 +24,30 @@ app.get("/newEntry", function(request, response) {
     response.render("newEntry");
 });
 
+app.get("/remove/:id", function(request, response) {
+    var elementId = parseInt(request.params.id);
+    
+    entries.map(function (data) {
+        if (entries.id == elementId) {
+            var myindex = elementId - 1;
+            array.splice(myindex, 1);
+            //arrayRemove(entries, elementId);
+            response.redirect("/");
+        } else {
+            response.send("Error, Data not delete");
+        }
+    });
+
+    response.redirect("/");
+});
+
 app.post("/newEntry", function(request, response) {
     if(!request.body.title || !request.body.body) {
         response.status(400).send("Entries must have a title and description.")
       return;
     }
     entries.push({
+        id: entries.length + 1,
         title: request.body.title,
         content: request.body.body,
         published: new Date()

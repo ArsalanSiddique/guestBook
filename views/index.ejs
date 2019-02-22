@@ -4,6 +4,7 @@
         <% entries.forEach(function(entry)  { %>
         <div class="panel panel-default">
             <div class="panel-heading">
+                <a href="/remove/<%= entry.id %>"><span class="label label-danger pull-right" style="margin-left: 10px; font-size: 12px">&#215;</span></a>
                 <div class="muted pull-right"><%= entry.published %></div>
                 <%= entry.title %>
             </div>
