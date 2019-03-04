@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+app.use(express.static(__dirname + '/public'));
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -13,7 +14,6 @@ var entries = [];
 app.locals.entries = entries;
 
 app.use(logger("dev")); // default logger format
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", function(request, response) {
@@ -27,10 +27,11 @@ app.get("/newEntry", function(request, response) {
 app.get("/remove/:id", function(request, response) {
     var elementId = parseInt(request.params.id);
     
-    entries.map(function (data) {
-        if (entries.id == elementId) {
+    entries.map(function (entry) {
+
+        if (entry.id == elementId) {
             var myindex = elementId - 1;
-            array.splice(myindex, 1);
+            entries.splice(myindex, 1);
             //arrayRemove(entries, elementId);
             response.redirect("/");
         } else {
@@ -61,5 +62,5 @@ app.use(function(request, response) {
 });
 
 http.createServer(app).listen(3000, function() {
-    console.log("App is ruuning on port 3000");
+    console.log("App is runing on port 3000");
 });
